@@ -1,7 +1,3 @@
 
-
-function a (){
-  console.log(1);
-}
-
-console.log(2);
+var Com = require('./src/test');
+new Com();

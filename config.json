@@ -1,4 +1,5 @@
 {
   "com": "/Users/zhouningyi/git/tools/test",
+  "comRelative": "./src/test",
   "html": "/Users/zhouningyi/git/tools/vicom/index.html"
 }

@@ -2,13 +2,16 @@
  * @Author: zhouningyi
  * @Date:   2016-10-01 14:18:17
  * @Last Modified by:   zhouningyi
- * @Last Modified time: 2016-10-01 20:37:59
+ * @Last Modified time: 2016-10-01 21:18:40
  */
 var path = require('path');
 var config = require('./config');
-var src = path.resolve(__dirname, config.com); //com src
+var src = path.resolve(__dirname, './');
+
+
+// path.resolve(__dirname, config.com); //com src
 var htmlSrc = path.resolve(__dirname, config.html);
-console.log(htmlSrc)
+console.log(src, htmlSrc)
 
 
 var webpack = require('webpack');
@@ -20,7 +23,6 @@ var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var ip = require('ip');
 var SftpWebpackPlugin = require('sftp-webpack-plugin');
 
-console.log(path.join(__dirname, "node_modules"), 'path.join(__dirname, "node_modules")');
 var SFTP_CONFIG = {
   on: process.env.SFTP || false, // default false
   conf: {
@@ -39,7 +41,7 @@ var vNodeModules = path.join(__dirname, 'node_modules');
 module.exports = {
   entry: [
     'babel-polyfill',
-    path.join(config.com, '/index.js')
+    path.join(src, '/index.js')
   ],
   resolveLoader: {
     fallback: [vNodeModules]
