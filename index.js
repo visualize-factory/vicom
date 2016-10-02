@@ -1,3 +1,5 @@
 
+require('./index.css');
 var Com = require('./src/test');
-new Com();
+var container = document.getElementById('container')
+new Com(container);

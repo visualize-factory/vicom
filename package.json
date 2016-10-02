@@ -5,6 +5,9 @@
     "type": "git",
     "url": "http://gitlab.zhonganonline.com/tools/vicom.git"
   },
+  "bin": {
+    "vc": "./bin/vc"
+  },
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
@@ -58,5 +61,8 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1"
+  },
+  "dependencies": {
+    "commander": "^2.9.0"
   }
 }
