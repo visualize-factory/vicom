@@ -41,8 +41,10 @@ function updateFiles() {
 function createServer() {
 	var wcfg = path.join(toolRootDir, './webpack.config.js');
 	var program = childProcess.exec('NODE_ENV=development webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0 --port 8080 --config ' + wcfg);
+	Utils.done('调试服务开启');
 }
 
 createSoftLink();
 updateFiles();
 createServer();
+
