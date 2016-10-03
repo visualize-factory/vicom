@@ -2,13 +2,14 @@ var chalk = require('chalk');
 var ascii = require('./ascii');
 
 function print(str, type){//type 可以为 green red yellow等
+	type = type || 'green';
   console.log(chalk[type](str + '\n'));
 }
 
 //执行完一个大任务时候执行
 function done(str){
 	var n = str.length;
-	var str = ascii.createLogo(str + ' | ' + 'powerd by Vicom', n);
+	var str = ascii.createLogo(str + ' | ' + 'powerd by vicom', n);
 	return print(str, 'yellow');
 }
 
