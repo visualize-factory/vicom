@@ -4,6 +4,8 @@
 var childProcess = require('child_process');
 var path = require('path');
 var fs = require('fs');
+//
+var Utils = require('./libs/utils');
 
 var comdir = process.cwd();
 var tooldir = path.join(__dirname, './../coms');
@@ -39,9 +41,12 @@ function updateFiles() {
 
 //
 function createServer() {
-	var wcfg = path.join(toolRootDir, './webpack.config.js');
-	var program = childProcess.exec('NODE_ENV=development webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0 --port 8080 --config ' + wcfg);
-	Utils.done('调试服务开启');
+	var cmd = 'NODE_ENV=development webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0 --port 8080 --config ' + 
+	path.join(toolRootDir, './webpack.config.js');
+	//
+	Utils.exec(cmd, function(){
+		Utils.done('调试服务开启');
+	});
 }
 
 createSoftLink();

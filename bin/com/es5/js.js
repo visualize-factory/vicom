@@ -23,6 +23,7 @@ module.exports = function(opt) {
  ${name} = Event.extend(${name}, {
    init: function(){},
  	 initEvents: function(){},
+ 	 //数据导入
  	 data: function(ds){
  	   this._data = ds;
  	 },
@@ -31,6 +32,7 @@ module.exports = function(opt) {
  	 	 this.draw();
  	 },
  	 draw: function(){},
+ 	 //更新配置，如各种样式
  	 updateOptions: function(options){
  	 	 this.options = Utils.deepMerge(this.options, options);
  	 }
@@ -38,5 +40,7 @@ module.exports = function(opt) {
  
  //
  ${name}.options = {};
+
+ module.exports = ${name};
 `;
 };

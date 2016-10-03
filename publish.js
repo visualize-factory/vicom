@@ -3,7 +3,7 @@ var path = require('path');
 var cp = require('child_process');
 var Utils = require('./bin/libs/utils');
 
-//公用方法
+//让版本号+1
 function verionPlus(version) {
 	var ns = version.split('.');
 	var n = ns[2];
@@ -17,7 +17,6 @@ function writeFile(pth, json) {
 	fs.writeFileSync(pth, JSON.stringify(json, null, 2), 'utf8');
 }
 
-
 function updatePkg() {
 	var packageUrl = path.join(__dirname, './package.json');
 	var package = fs.readFileSync(packageUrl);
@@ -27,6 +26,10 @@ function updatePkg() {
 	writeFile(packageUrl, package);
 	Utils.print('package.json已更新, 开始发布...');
 }
+
+
+//
+var exec = Utils.exec;
 
 function publish(){
 	exec('npm publish', function() {
@@ -41,13 +44,6 @@ function publish(){
 	});
 }
 
-
-function exec(cmd, cb){//执行某个命令
-	var f = cp.exec(cmd, cb);
-	f.stdout.on('data', function(d){
-		return Utils.print(d, 'green');
-	});
-}
 
 updatePkg();
 publish();

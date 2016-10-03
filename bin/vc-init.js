@@ -92,7 +92,7 @@ function createES5Files(answers){
 function createReactFiles(){
 }
 
-function ask() {
+function ask(next) {
 	inquirer.prompt(questions)
 	.then(function(answers) {
 		comdir = path.join(comsdir, answers.name);
@@ -107,9 +107,14 @@ function ask() {
 }
 
 function next(){
-	childProcess.exec('subl ./');
-	childProcess.exec('open ' + path.join(comdir));
+	Utils.exec('subl ./', function(){
+		Utils.exec('open ' + comdir, function(){
+			Utils.exec('cd ' + comdir + ' && cnpm i', function(){
+				Utils.done('组件顺利生成');
+			})
+		});
+	});
 }
 
-ask();
+ask(next);
 
