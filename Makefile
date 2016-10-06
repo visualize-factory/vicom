@@ -2,8 +2,8 @@
 version=
 
 install:
-	@cd /Users/zhouningyi/git/coms/ss && cnpm install
+	@cd /Users/eason/Work/Git/Za/vicom && cnpm install
 
 publish:
-	@cd /Users/zhouningyi/git/coms/ss && npm publish
-	@cnpm sync ss
+	@cd /Users/eason/Work/Git/Za/vicom && npm publish
+	@cnpm sync vicom
