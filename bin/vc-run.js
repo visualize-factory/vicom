@@ -14,7 +14,6 @@ var htmlDir = path.join(__dirname, './../index.html');
 var cs = comdir.split('\/');
 var name = cs[cs.length - 1];
 
-
 function createSoftLink() {
 	childProcess.exec('ln -s ' + comdir + ' ' + tooldir);
 }

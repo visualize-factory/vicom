@@ -24,7 +24,7 @@ function updatePkg() {
 
 	package.version = verionPlus(package.version);
 	writeFile(packageUrl, package);
-	Utils.print('package.json已更新, 开始发布...');
+	Utils.print('package.json已更新, 开始发布...', 'yellow');
 }
 
 
@@ -33,11 +33,11 @@ var exec = Utils.exec;
 
 function publish(){
 	exec('npm publish', function() {
-		Utils.print('已发布npm, 开始同步cnpm...\n', 'red');
+		Utils.print('已发布npm, 开始同步cnpm...\n', 'yellow');
 		exec('cnpm sync vicom', function() {
-			Utils.print('已同步cnpm, 开始本地安装...\n', 'red');
+			Utils.print('已同步cnpm, 开始本地安装...\n', 'yellow');
 			exec('npm i vicom -g', function() {
-	     Utils.print('已更新全局vicom...\n', 'red');
+	     Utils.print('已更新全局vicom...\n', 'yellow');
 	     Utils.done('更新vicom版本');			
 	    });
 		});

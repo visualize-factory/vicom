@@ -2,7 +2,7 @@
  * @Author: zhouningyi
  * @Date:   2016-10-01 14:18:17
  * @Last Modified by:   zhouningyi
- * @Last Modified time: 2016-10-01 21:18:40
+ * @Last Modified time: 2016-10-03 14:08:53
  */
 var path = require('path');
 var config = require('./config');
@@ -11,8 +11,6 @@ var src = path.resolve(__dirname, './');
 
 // path.resolve(__dirname, config.com); //com src
 var htmlSrc = path.resolve(__dirname, config.html);
-console.log(src, htmlSrc)
-
 
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
