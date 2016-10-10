@@ -1,0 +1,9 @@
+/*
+* @Author: <%= username %>
+* @Date: <%= new Date().toLocaleString() %>
+*/
+
+import <%= Name %> from './<%= Name %>.jsx'
+require('index.css');
+
+export default <%= Name %>;

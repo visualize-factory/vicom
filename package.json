@@ -39,6 +39,7 @@
     "classnames": "^2.2.5",
     "commander": "^2.9.0",
     "css-loader": "^0.25.0",
+    "ejs": "^2.5.2",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^2.22.0",
     "inquirer": "^1.2.1",

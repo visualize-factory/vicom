@@ -4,6 +4,7 @@
 var childProcess = require('child_process');
 var path = require('path');
 var fs = require('fs');
+var ejs = require('ejs');
 var inquirer = require('inquirer');
 var Utils = require('./libs/utils');
 
@@ -55,7 +56,11 @@ var questions = [{
 
 
 function createDir(answers){
-	var e = fs.mkdirSync('./' + answers.name);
+  if (answers.type === 'react') {
+	  var e = fs.mkdirSync('./' + answers.Name);
+  } else {
+	  var e = fs.mkdirSync('./' + answers.name);
+  }
 	if(e) console.log('新建文件夹时出错', e);
 }
 
@@ -67,49 +72,50 @@ function writeFile(content, name, comName){
 
 function createFiles(answers){
 	var dir = answers.name;
-	var templateDir = './com/' + answers.type + '/';
+	var templateDir = path.resolve(__dirname, './com', answers.type);
 	//
-	var js = require(templateDir + 'js')(answers);
-	writeFile(js, 'index.js', dir);
+	var js = fs.readFileSync(path.resolve(templateDir, 'js.template'), 'utf8');
+	writeFile(ejs.render(js, answers), 'index.js', dir);
+
   if (answers.type === 'react') {
-    var jsx = require(templateDir + 'jsx')(answers);
-    writeFile(js, Utils.upperFirstChar(answers.name) + '.jsx', dir);
+    var jsx = fs.readFileSync(path.resolve(templateDir,'jsx.template'), 'utf8');
+    writeFile(ejs.render(jsx, answers), answers.Name + '.jsx', dir);
   }
-	var css = require(templateDir + 'css')(answers);
-	writeFile(css, 'index.css', dir);
 
-	var pkg = require(templateDir + 'pkg')(answers);
-	writeFile(pkg, 'package.json', dir);
+	var css = fs.readFileSync(path.resolve(templateDir, 'css.template'), 'utf8');
+	writeFile(ejs.render(css, answers), 'index.css', dir);
+
+	var pkg = fs.readFileSync(path.resolve(templateDir, 'pkg.template'), 'utf8');
+	writeFile(ejs.render(pkg, answers), 'package.json', dir);
 	//
 	//
-	var pubdir = './com/public/';
-	var gitignore = require(pubdir + 'gitignore');
+	var pubDir = path.resolve(__dirname, 'com/public');
+	var gitignore = fs.readFileSync(path.resolve(pubDir, 'gitignore.template'), 'utf8');
 
-	writeFile(gitignore, '.gitignore', dir);
+	writeFile(ejs.render(gitignore, answers), '.gitignore', dir);
 }
 
 function ask(next) {
 	inquirer.prompt(questions)
 	.then(function(answers) {
+    if (answers.type === 'react') {
+      answers.Name = Utils.upperFirstChar(answers.name);
+    }
 		comdir = path.join(comsdir, answers.name);
 		console.log(comdir, 'comdir');
 		//
 		createDir(answers);
 		createFiles(answers);
 		//
-		Utils.done('组件顺利生成');
+		Utils.done('组件顺利生成，正在安装依赖');
 		setTimeout(next, 500);
 	});
 }
 
 function next(){
-	Utils.exec('subl ./', function(){
-		Utils.exec('open ' + comdir, function(){
-			Utils.exec('cd ' + comdir + ' && cnpm i', function(){
-				Utils.done('组件顺利生成');
-			})
-		});
-	});
+  Utils.exec('cd ' + comdir + ' && cnpm i', function(){
+    Utils.done('生成完成');
+  });
 }
 
 ask(next);

@@ -1,0 +1,18 @@
+{
+  "author": "<%= username %>",
+  "name": "<%= name %>",
+  "description": "<%= desc %>",
+  "repository": {
+    "type": "git"
+   },
+  "version": "0.0.1",
+  "scripts": {
+  },
+  "dependencies": {
+    "bcore": "*",
+    "lodash": "^3.10.0"
+  },
+  "devDependencies": {
+    "dat-gui": "^0.5.0"
+  }
+}

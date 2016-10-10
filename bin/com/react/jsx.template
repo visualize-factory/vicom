@@ -1,0 +1,19 @@
+/*
+* @Author: <%= username %>
+* @Date: <%= new Date().toLocaleString() %>
+*/
+
+import React, { Component } from 'react'
+
+class <%= Name %> extends Component {
+  constructor(props: any) {
+    super(props)
+
+  }
+
+  render() {
+    return (
+      
+    )
+  }
+}

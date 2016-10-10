@@ -4,3 +4,13 @@ coverage
 npm-debug.log
 .DS_Store
 dist
+
+# Vim
+# swap
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
