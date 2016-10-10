@@ -59,27 +59,26 @@ function createDir(answers){
 	if(e) console.log('新建文件夹时出错', e);
 }
 
-function createFiles(answers){
-	var type = answers.type;
-	if (type === 'es5') return createES5Files(answers);
-	if (type === 'react') return createReactFiles(answers);
-}
 
 function writeFile(content, name, comName){
 	var dir = path.join(comsdir, comName + '/' + name); 
 	fs.writeFileSync(dir, content, 'utf8');
 }
 
-function createES5Files(answers){
+function createFiles(answers){
 	var dir = answers.name;
-	var es5dir = './com/es5/';
+	var templateDir = './com/' + answers.type + '/';
 	//
-	var js = require(es5dir + 'js')(answers);
+	var js = require(templateDir + 'js')(answers);
 	writeFile(js, 'index.js', dir);
-	var css = require(es5dir + 'css')(answers);
+  if (answers.type === 'react') {
+    var jsx = require(templateDir + 'jsx')(answers);
+    writeFile(js, Utils.upperFirstChar(answers.name) + '.jsx', dir);
+  }
+	var css = require(templateDir + 'css')(answers);
 	writeFile(css, 'index.css', dir);
 
-	var pkg = require(es5dir + 'pkg')(answers);
+	var pkg = require(templateDir + 'pkg')(answers);
 	writeFile(pkg, 'package.json', dir);
 	//
 	//
@@ -87,9 +86,6 @@ function createES5Files(answers){
 	var gitignore = require(pubdir + 'gitignore');
 
 	writeFile(gitignore, '.gitignore', dir);
-}
-
-function createReactFiles(){
 }
 
 function ask(next) {
