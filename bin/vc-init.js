@@ -98,9 +98,7 @@ function createFiles(answers){
 function ask(next) {
 	inquirer.prompt(questions)
 	.then(function(answers) {
-    if (answers.type === 'react') {
-      answers.Name = Utils.upperFirstChar(answers.name);
-    }
+    answers.Name = Utils.upperFirstChar(answers.name);
 		comdir = path.join(comsdir, answers.name);
 		console.log(comdir, 'comdir');
 		//

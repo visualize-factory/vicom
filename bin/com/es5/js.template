@@ -10,7 +10,7 @@ require('./index.css');
 var Utils = require('bcore/utils');
 var Event = require('bcore/event');
 //
-function <%= name %>(container, options){
+function <%= Name %>(container, options){
 this.container = container;
  options = this.options = Utils.deepMerge(<%= name %>.options, options);
  //
