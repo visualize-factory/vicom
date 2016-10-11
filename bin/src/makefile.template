@@ -1,0 +1,8 @@
+version=
+
+install:
+	@cd <%= com %> && cnpm install
+
+publish:
+	@cd <%= com %> && npm publish
+	@cnpm sync <%= name %>

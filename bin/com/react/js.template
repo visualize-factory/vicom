@@ -3,7 +3,7 @@
 * @Date: <%= new Date().toLocaleString() %>
 */
 
+require('./index.css');
 import <%= Name %> from './<%= Name %>.jsx'
-require('index.css');
 
 export default <%= Name %>;

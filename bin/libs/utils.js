@@ -1,5 +1,6 @@
 var chalk = require('chalk');
 var ascii = require('./ascii');
+var process = require('process');
 var cp = require('child_process');
 
 function print(str, type){//type 可以为 green red yellow等
@@ -31,11 +32,20 @@ function signature(opt){
 }
 
 //执行某个命令
-function exec(cmd, cb){
-	var f = cp.exec(cmd, cb);
-	f.stdout.on('data', function(d){
-		return print(d, 'green');
-	});
+function exec(cmd, cwd, cb){
+  if (!cb) {
+    cb = cwd;
+    cwd = process.cwd();
+  }
+  console.log(cwd);
+	var f = cp.exec(cmd,
+    {
+      cwd: cwd,
+    },
+    cb
+  );
+	f.stdout.pipe(process.stdout);
+	f.stderr.pipe(process.stderr);
 }
 
 module.exports = {

@@ -58,8 +58,10 @@ var questions = [{
 function createDir(answers){
   if (answers.type === 'react') {
 	  var e = fs.mkdirSync('./' + answers.Name);
+    answers.dirname = answers.Name;
   } else {
 	  var e = fs.mkdirSync('./' + answers.name);
+    answers.dirname = answers.name;
   }
 	if(e) console.log('新建文件夹时出错', e);
 }
@@ -91,8 +93,16 @@ function createFiles(answers){
 	//
 	var pubDir = path.resolve(__dirname, 'com/public');
 	var gitignore = fs.readFileSync(path.resolve(pubDir, 'gitignore.template'), 'utf8');
-
 	writeFile(ejs.render(gitignore, answers), '.gitignore', dir);
+
+	//更新配置
+	var config = {
+    name: answers.dirname,
+		com: path.resolve(process.cwd(), answers.dirname),
+		comRelative: './coms/' + answers.dirname,
+		html: path.resolve('../index.html')
+	};
+	writeFile(JSON.stringify(config, null, 2), 'config.json', dir);
 }
 
 function ask(next) {

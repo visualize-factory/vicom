@@ -1,0 +1,4 @@
+require('./index.css');
+var Com = require('<%= comRelative %>');
+var container = document.getElementById('container')
+new Com(container);

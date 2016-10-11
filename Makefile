@@ -1,9 +1,8 @@
-
 version=
 
 install:
-	@cd /Users/zhouningyi/git/coms/ss && cnpm install
+	@cd /Users/disoul/Documents/es5example && cnpm install
 
 publish:
-	@cd /Users/zhouningyi/git/coms/ss && npm publish
-	@cnpm sync ss
+	@cd /Users/disoul/Documents/es5example && npm publish
+	@cnpm sync es5example
