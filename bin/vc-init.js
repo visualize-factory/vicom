@@ -102,7 +102,7 @@ function createFiles(answers){
 		comRelative: './coms/' + answers.dirname,
 		html: path.resolve('../index.html')
 	};
-	writeFile(JSON.stringify(config, null, 2), 'config.json', dir);
+	writeFile(JSON.stringify(config, null, 2), '.vc-config.json', dir);
 }
 
 function ask(next) {

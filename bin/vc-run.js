@@ -28,10 +28,17 @@ function writeFile(name, content) {
 
 function updateFiles() {
 	//读取配置
-  fs.readFile(path.resolve(process.cwd(), 'config.json'), function(err,data) {
+  fs.readFile(path.resolve(process.cwd(), '.vc-config.json'), function(err,data) {
     if (err) {
-      console.error(err);
-      console.error('无法读取config.json，请确认路径是否正确');
+      console.log('适用默认的vc-config...');
+
+      config = {
+        name: answers.dirname,
+        com: path.resolve(process.cwd(), answers.dirname),
+        comRelative: './coms/' + answers.dirname,
+        html: path.resolve('../index.html')
+      };
+      writeFile('.vc-config.json', JSON.stringify(config, null, 2));
     }
 
     config = JSON.parse(data);
@@ -48,8 +55,28 @@ function updateFiles() {
         var makefile = fs.readFileSync(path.resolve(__dirname, './src/makefile.template'), 'utf8');
         writeFile('Makefile', ejs.render(makefile, config));
     }
-
+    mergeNodeModules();
     createServer();
+  });
+}
+
+function mergeNodeModules() {
+  var comPath = path.resolve(process.cwd(), 'node_modules');
+  console.log(comPath);
+  var vcPath = path.resolve(__dirname, '../node_modules/');
+  var comModules = fs.readdirSync(comPath);
+  var vcModules = fs.readdirSync(vcPath);
+  
+  Utils.done('整合node_modules..');
+
+  comModules.map(function(module) {
+    if (vcModules.lastIndexOf(module) === -1) {
+      console.log('add module:' + module);
+      fs.symlinkSync(
+        path.resolve(comPath, module),
+        path.resolve(vcPath, module)
+      );
+    }
   });
 }
 

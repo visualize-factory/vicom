@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import ReactExample from './coms/ReactExample';
+import Echar from './coms/Echar';
 
 ReactDom.render(
-  <ReactExample />,
+  <Echar />,
   document.getElementById('container')
 );
