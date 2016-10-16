@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import Echar from './coms/Echar';
+import CombineCom from './coms/CombineCom';
 
 ReactDom.render(
-  <Echar />,
+  <CombineCom />,
   document.getElementById('container')
 );

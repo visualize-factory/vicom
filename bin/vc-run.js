@@ -27,37 +27,55 @@ function writeFile(name, content) {
 }
 
 function updateFiles() {
-	//读取配置
-  fs.readFile(path.resolve(process.cwd(), '.vc-config.json'), function(err,data) {
-    if (err) {
-      console.log('适用默认的vc-config...');
+  var config = {
+    name: name,
+    com: comdir,
+    comRelative: './coms/' + name,
+    html: path.join(__dirname, '../index.html')
+  };
+  writeFile('config.json', JSON.stringify(config, null, 2));
+  switch (process.argv[2]) {
+    case 'react':
+      var js = fs.readFileSync(path.resolve(__dirname, './src/react.template'), 'utf8');
+      writeFile('index.js', ejs.render(js, config));
+      break;
+    case 'es5':
+    default:
+      var js = fs.readFileSync(path.resolve(__dirname, './src/js.template'), 'utf8');
+      writeFile('index.js', ejs.render(js, config));
+      var makefile = fs.readFileSync(path.resolve(__dirname, './src/makefile.template'), 'utf8');
+      writeFile('Makefile', ejs.render(makefile, config));
+  }
+  mergeNodeModules();
+  createServer();
 
-      config = {
-        name: answers.dirname,
-        com: path.resolve(process.cwd(), answers.dirname),
-        comRelative: './coms/' + answers.dirname,
-        html: path.resolve('../index.html')
-      };
-      writeFile('.vc-config.json', JSON.stringify(config, null, 2));
-    }
+  // //读取配置
+  //  fs.readFile(path.resolve(process.cwd(), '.vc-config.json'), function(err,data) {
+  //    if (err) {
+  //      console.log('适用默认的vc-config...');
+  //      config = 
+  //      writeFile('.vc-config.json', JSON.stringify(config, null, 2));
+  //    }
 
-    config = JSON.parse(data);
-    var projType = process.argv[2];
-    switch(process.argv[2]) {
-      case 'react':
-        var js = fs.readFileSync(path.resolve(__dirname, './src/react.template'), 'utf8');
-        writeFile('index.js', ejs.render(js, config));
-        break;
-      case 'es5':
-      default:
-        var js = fs.readFileSync(path.resolve(__dirname, './src/js.template'), 'utf8');
-        writeFile('index.js', ejs.render(js, config));
-        var makefile = fs.readFileSync(path.resolve(__dirname, './src/makefile.template'), 'utf8');
-        writeFile('Makefile', ejs.render(makefile, config));
-    }
-    mergeNodeModules();
-    createServer();
-  });
+  //    config = JSON.parse(data);
+
+  //    var projType = process.argv[2];
+
+  //    switch(process.argv[2]) {
+  //      case 'react':
+  //        var js = fs.readFileSync(path.resolve(__dirname, './src/react.template'), 'utf8');
+  //        writeFile('index.js', ejs.render(js, config));
+  //        break;
+  //      case 'es5':
+  //      default:
+  //        var js = fs.readFileSync(path.resolve(__dirname, './src/js.template'), 'utf8');
+  //        writeFile('index.js', ejs.render(js, config));
+  //        var makefile = fs.readFileSync(path.resolve(__dirname, './src/makefile.template'), 'utf8');
+  //        writeFile('Makefile', ejs.render(makefile, config));
+  //    }
+  //    mergeNodeModules();
+  //    createServer();
+  //  });
 }
 
 function mergeNodeModules() {
@@ -84,6 +102,7 @@ function mergeNodeModules() {
 function createServer() {
 	var cmd = 'NODE_ENV=development webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0 --port 8080 --config ' + 
 	path.join(toolRootDir, './webpack.config.js');
+
 	//
 	Utils.exec(cmd, path.resolve(__dirname, '../'), function(){
 		Utils.done('调试服务开启');

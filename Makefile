@@ -1,8 +1,8 @@
 version=
 
 install:
-	@cd /Users/disoul/Documents/es5example && cnpm install
+	@cd /Users/zhouningyi/git/coms/glmap-react/components/CombineCom && cnpm install
 
 publish:
-	@cd /Users/disoul/Documents/es5example && npm publish
-	@cnpm sync es5example
+	@cd /Users/zhouningyi/git/coms/glmap-react/components/CombineCom && npm publish
+	@cnpm sync CombineCom

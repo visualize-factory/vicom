@@ -1,6 +1,6 @@
 {
-  "name": "Test",
-  "com": "/Users/disoul/Documents/Test",
-  "comRelative": "./coms/Test",
-  "html": "/Users/disoul/Documents/vicom/index.html"
+  "name": "CombineCom",
+  "com": "/Users/zhouningyi/git/coms/glmap-react/components/CombineCom",
+  "comRelative": "./coms/CombineCom",
+  "html": "/Users/zhouningyi/git/tools/vicom/index.html"
 }
