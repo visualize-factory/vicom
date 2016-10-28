@@ -3,12 +3,13 @@
 * @Date: <%= new Date().toLocaleString() %>
 */
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 export default class <%= Name %> extends Component {
+  static propTypes = {}
+  static defaultProps = {}
   constructor(props: any) {
     super(props)
-
   }
 
   render() {
