@@ -74,7 +74,7 @@ module.exports = {
     root: vNodeModules,
     loaders: [{
       test: /\.(js|jsx)$/,
-      exclude: /node_modules/,
+      exclude: /vicom\/node_modules/,
       loader: 'babel',
       query: {
         presets: [
