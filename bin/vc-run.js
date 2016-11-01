@@ -19,7 +19,22 @@ var name = cs[cs.length - 1];
 var config = {};
 
 function createSoftLink() {
-	childProcess.exec('ln -s ' + comdir + ' ' + tooldir);
+  try {
+    fs.accessSync(tooldir, fs.constants.F_OK);
+  } catch(err) {
+    console.log('创建coms目录...');
+    fs.mkdirSync(tooldir);
+  }
+
+  try {
+    fs.accessSync(path.resolve(tooldir, name), fs.constants.F_OK);
+    console.log('链接存在，跳过', err);
+  } catch(err) {
+    fs.symlinkSync(
+      comdir,
+      path.resolve(tooldir, name)
+    );
+  }
 }
 //
 function writeFile(name, content) {
@@ -111,4 +126,3 @@ function createServer() {
 
 createSoftLink();
 updateFiles();
-
