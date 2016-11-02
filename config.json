@@ -1,6 +1,6 @@
 {
-  "name": "CombineCom",
-  "com": "/Users/zhouningyi/git/coms/coms/CombineCom",
-  "comRelative": "./coms/CombineCom",
-  "html": "/Users/zhouningyi/git/tools/vicom/index.html"
+  "name": "Demo2",
+  "com": "/Users/disoul/Documents/lib/components/Demo2",
+  "comRelative": "./coms/lib/components/Demo2",
+  "html": "/Users/disoul/Documents/vicom/index.html"
 }

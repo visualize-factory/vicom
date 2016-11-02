@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import CombineCom from './coms/CombineCom';
+import Demo2 from './coms/lib/components/Demo2';
 
 ReactDom.render(
-  <CombineCom />,
+  <Demo2 />,
   document.getElementById('container')
 );

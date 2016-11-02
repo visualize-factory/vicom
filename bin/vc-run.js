@@ -1,5 +1,10 @@
 #!/usr/bin/env node
-
+/**
+* @Author: disoul
+* @Date:   2016-10-31T11:24:59+08:00
+* @Last modified by:   disoul
+* @Last modified time: 2016-11-02T16:55:12+08:00
+*/
 'use strict';
 var childProcess = require('child_process');
 var process = require('process');
@@ -10,12 +15,15 @@ var fs = require('fs');
 var Utils = require('./libs/utils');
 
 var comdir = process.cwd();
-var tooldir = path.join(__dirname, './../coms');
-var toolRootDir = path.join(__dirname, './../');
-var htmlDir = path.join(__dirname, './../index.html');
+// TODO: get libdir
+var libdir = path.resolve(process.cwd(), '../../');
+var tooldir = path.resolve(__dirname, './../coms');
+var toolRootDir = path.resolve(__dirname, './../');
+var htmlDir = path.resolve(__dirname, './../index.html');
 var cs = comdir.split('\/');
+var libName = cs[cs.length - 3];
 var name = cs[cs.length - 1];
-
+console.log('libName', libName);
 var config = {};
 
 function createSoftLink() {
@@ -27,12 +35,13 @@ function createSoftLink() {
   }
 
   try {
-    fs.accessSync(path.resolve(tooldir, name), fs.constants.F_OK);
-    console.log('链接存在，跳过', err);
+    fs.accessSync(path.resolve(tooldir, libName), fs.constants.F_OK);
+    console.log('链接存在，跳过');
   } catch(err) {
+    console.log('创建链接', libdir, path.resolve(tooldir, libName));
     fs.symlinkSync(
-      comdir,
-      path.resolve(tooldir, name)
+      libdir,
+      path.resolve(tooldir, libName)
     );
   }
 }
@@ -45,7 +54,7 @@ function updateFiles() {
   var config = {
     name: name,
     com: comdir,
-    comRelative: './coms/' + name,
+    comRelative: './coms/' + libName + '/' + cs[cs.length-2] + '/' + name,
     html: path.join(__dirname, '../index.html')
   };
   writeFile('config.json', JSON.stringify(config, null, 2));
@@ -68,7 +77,7 @@ function updateFiles() {
   //  fs.readFile(path.resolve(process.cwd(), '.vc-config.json'), function(err,data) {
   //    if (err) {
   //      console.log('适用默认的vc-config...');
-  //      config = 
+  //      config =
   //      writeFile('.vc-config.json', JSON.stringify(config, null, 2));
   //    }
 
@@ -99,23 +108,46 @@ function mergeNodeModules() {
   var vcPath = path.resolve(__dirname, '../node_modules/');
   var comModules = fs.readdirSync(comPath);
   var vcModules = fs.readdirSync(vcPath);
-  
+  var linkList;
+
+  try {
+    linkList = fs.readdirSync(path.resolve(__dirname, '../.linklist'));
+    linkList = linkList.split('\n');
+  } catch(err) {
+    linkList = [];
+  }
+
+  console.log('清理node_modules link...');
+  linkList.map(link => {
+    console.log('rm', link);
+    fs.rmdirSync(path.resolve(vcPath, link));
+  });
+
+  linkList = [];
+
   Utils.done('整合node_modules..');
 
   comModules.map(function(module) {
     if (vcModules.lastIndexOf(module) === -1) {
-      console.log('add module:' + module);
-      fs.symlinkSync(
-        path.resolve(comPath, module),
-        path.resolve(vcPath, module)
-      );
+      console.log('link', module);
+      linkList.push(module);
     }
+  });
+
+  writeFile('.linklist', linkList.join('\n'));
+
+  linkList.map(module => {
+    console.log('add module:' + module);
+    fs.symlinkSync(
+      path.resolve(comPath, module),
+      path.resolve(vcPath, module)
+    );
   });
 }
 
 //
 function createServer() {
-	var cmd = 'NODE_ENV=development webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0 --port 8080 --config ' + 
+	var cmd = 'NODE_ENV=development webpack-dev-server --hot --inline --progress --colors --host 0.0.0.0 --port 8080 --config ' +
 	path.join(toolRootDir, './webpack.config.js');
 
 	//

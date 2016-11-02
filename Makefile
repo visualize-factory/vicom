@@ -1,8 +1,8 @@
 version=
 
 install:
-	@cd /Users/zhouningyi/git/coms/glmap-react/components/CombineCom && cnpm install
+	@cd /Users/disoul/Documents/lib/components/Demo2 && cnpm install
 
 publish:
-	@cd /Users/zhouningyi/git/coms/glmap-react/components/CombineCom && npm publish
-	@cnpm sync CombineCom
+	@cd /Users/disoul/Documents/lib/components/Demo2 && npm publish
+	@cnpm sync Demo2
