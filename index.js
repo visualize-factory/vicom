@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import Demo2 from './coms/lib/components/Demo2';
+import Demo3 from './coms/lib/components/Demo3';
 
 ReactDom.render(
-  <Demo2 />,
+  <Demo3 />,
   document.getElementById('container')
 );

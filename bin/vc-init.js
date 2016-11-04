@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+/**
+* @Author: disoul
+* @Date:   2016-10-31T11:24:59+08:00
+* @Last modified by:   disoul
+* @Last modified time: 2016-11-04T11:14:11+08:00
+*/
 
 'use strict';
 var childProcess = require('child_process');
@@ -10,6 +16,7 @@ var Utils = require('./libs/utils');
 
 //环境相关的参数
 var comsdir = process.cwd();
+var libdir = path.resolve(comsdir, '../');
 var comdir;
 
 //建立问答
@@ -68,7 +75,7 @@ function createDir(answers){
 
 
 function writeFile(content, name, comName){
-	var dir = path.join(comsdir, comName + '/' + name); 
+	var dir = path.join(comsdir, comName + '/' + name);
 	fs.writeFileSync(dir, content, 'utf8');
 }
 
@@ -121,10 +128,9 @@ function ask(next) {
 }
 
 function next(){
-  Utils.exec('cd ' + comdir + ' && cnpm i', function(){
+  Utils.exec('cd ' + libdir + ' && cnpm i', function(){
     Utils.done('生成完成');
   });
 }
 
 ask(next);
-
