@@ -6,6 +6,8 @@ npm-debug.log
 dist
 /coms
 
+index.js
+
 # Vim
 # swap
 [._]*.s[a-w][a-z]
@@ -17,3 +19,5 @@ Session.vim
 *~
 
 coms/*
+
+.linklist

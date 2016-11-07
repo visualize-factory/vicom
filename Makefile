@@ -1,8 +1,7 @@
 version=
-
 install:
-	@cd /Users/zhouningyi/git/coms/coms/force && cnpm install
+	@cd /Users/disoul/Documents/lib/components/Demo2 && cnpm install
 
 publish:
-	@cd /Users/zhouningyi/git/coms/coms/force && npm publish
-	@cnpm sync force
+	@cd /Users/disoul/Documents/lib/components/Demo2 && npm publish
+	@cnpm sync Demo2

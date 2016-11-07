@@ -1,6 +1,6 @@
 {
-  "name": "force",
-  "com": "/Users/zhouningyi/git/coms/coms/force",
-  "comRelative": "./coms/force",
-  "html": "/Users/zhouningyi/git/tools/vicom/index.html"
+  "name": "Demo3",
+  "com": "/Users/disoul/Documents/lib/components/Demo3",
+  "comRelative": "./coms/lib/components/Demo3",
+  "html": "/Users/disoul/Documents/vicom/index.html"
 }

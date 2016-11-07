@@ -1,0 +1,15 @@
+asap
+core-js
+encoding
+fbjs
+iconv-lite
+immutable
+is-stream
+isomorphic-fetch
+js-tokens
+loose-envify
+node-fetch
+promise
+react
+ua-parser-js
+whatwg-fetch
