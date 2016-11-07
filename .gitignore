@@ -4,6 +4,7 @@ coverage
 npm-debug.log
 .DS_Store
 dist
+/coms
 
 # Vim
 # swap

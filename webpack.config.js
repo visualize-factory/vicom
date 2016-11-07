@@ -2,7 +2,7 @@
  * @Author: zhouningyi
  * @Date:   2016-10-01 14:18:17
  * @Last Modified by:   zhouningyi
- * @Last Modified time: 2016-10-16 16:50:15
+ * @Last Modified time: 2016-11-03 19:29:11
  */
 var path = require('path');
 var config = require('./config');
@@ -74,7 +74,7 @@ module.exports = {
     root: vNodeModules,
     loaders: [{
       test: /\.(js|jsx)$/,
-      exclude: /vicom\/node_modules/,
+      exclude: /node_modules/,
       loader: 'babel',
       query: {
         presets: [

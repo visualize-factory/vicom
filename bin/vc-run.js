@@ -28,8 +28,8 @@ function createSoftLink() {
 
   try {
     fs.accessSync(path.resolve(tooldir, name), fs.constants.F_OK);
-    console.log('链接存在，跳过', err);
   } catch(err) {
+    console.log('链接存在，跳过', err);
     fs.symlinkSync(
       comdir,
       path.resolve(tooldir, name)
