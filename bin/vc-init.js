@@ -112,7 +112,7 @@ function createFiles(answers){
 	writeFile(JSON.stringify(config, null, 2), '.vc-config.json', dir);
 }
 
-function ask(next) {
+function ask() {
 	inquirer.prompt(questions)
 	.then(function(answers) {
     answers.Name = Utils.upperFirstChar(answers.name);
@@ -122,15 +122,15 @@ function ask(next) {
 		createDir(answers);
 		createFiles(answers);
 		//
-		Utils.done('组件顺利生成，正在安装依赖');
-		setTimeout(next, 500);
+		Utils.done('组件顺利生成，请在库目录安装所需依赖');
 	});
 }
 
+/*
 function next(){
   Utils.exec('cd ' + libdir + ' && cnpm i', function(){
     Utils.done('生成完成');
   });
 }
-
-ask(next);
+*/
+ask();
