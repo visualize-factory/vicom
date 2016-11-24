@@ -1,6 +1,6 @@
 {
-  "name": "Demo3",
-  "com": "/Users/disoul/Documents/lib/components/Demo3",
-  "comRelative": "./coms/lib/components/Demo3",
-  "html": "/Users/disoul/Documents/vicom/index.html"
+  "name": "timeline",
+  "com": "/Users/zhouningyi/git/coms/test/components/timeline",
+  "comRelative": "./coms/test/components/timeline",
+  "html": "/Users/zhouningyi/git/tools/vicom/index.html"
 }

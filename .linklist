@@ -3,7 +3,6 @@ core-js
 encoding
 fbjs
 iconv-lite
-immutable
 is-stream
 isomorphic-fetch
 js-tokens

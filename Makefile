@@ -1,7 +1,8 @@
 version=
+
 install:
-	@cd /Users/disoul/Documents/lib/components/Demo2 && cnpm install
+	@cd /Users/zhouningyi/git/coms/test/components/timeline && cnpm install
 
 publish:
-	@cd /Users/disoul/Documents/lib/components/Demo2 && npm publish
-	@cnpm sync Demo2
+	@cd /Users/zhouningyi/git/coms/test/components/timeline && npm publish
+	@cnpm sync timeline
