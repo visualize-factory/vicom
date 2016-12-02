@@ -1,8 +1,8 @@
 version=
 
 install:
-	@cd /Users/zhouningyi/git/coms/test/components/timeline && cnpm install
+	@cd /Users/zhouningyi/git/coms/graph/components/circles && cnpm install
 
 publish:
-	@cd /Users/zhouningyi/git/coms/test/components/timeline && npm publish
-	@cnpm sync timeline
+	@cd /Users/zhouningyi/git/coms/graph/components/circles && npm publish
+	@cnpm sync circles

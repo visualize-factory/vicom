@@ -52,7 +52,7 @@ var questions = [{
 	type: 'list',
 	name: 'type',
 	message: '请选择组件类型',
-	choices: ['es5', 'react']
+	choices: ['es5', 'es6', 'react']
 }, {
 	type: "input",
 	name: "username",

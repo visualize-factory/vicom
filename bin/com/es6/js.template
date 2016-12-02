@@ -1,0 +1,45 @@
+/*
+* @Author: <%= username %>
+* @Date: <%= new Date().toLocaleString() %>
+*/
+
+'use strict';
+
+require('./index.css');
+
+import Utils from 'bcore/utils'
+import Event from 'bcore/event'
+
+//
+class <%= Name %> extends Event{
+  constructor(container, options){
+    super()
+    this.container = container
+    options = this.options = Utils.deepMerge(<%= Name %>.options, options);
+    this.init();
+  }
+  init(){
+   this.initEvents()
+  }
+  initEvents(){}
+  //数据导入
+  data(ds){
+    this._data = ds
+    this.processing()
+  }
+  processing(){}
+  render(ds){
+    if(ds) this.data(ds);
+    this.draw();
+  }
+  draw(){}
+  //更新配置，如各种样式
+  updateOptions(options){
+    this.options = Utils.deepMerge(this.options, options);
+  }
+};
+
+//
+<%= Name %>.options = {};
+
+module.exports = <%= Name %>;

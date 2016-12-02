@@ -1,6 +1,6 @@
 {
-  "name": "timeline",
-  "com": "/Users/zhouningyi/git/coms/test/components/timeline",
-  "comRelative": "./coms/test/components/timeline",
+  "name": "circles",
+  "com": "/Users/zhouningyi/git/coms/graph/components/circles",
+  "comRelative": "./coms/graph/components/circles",
   "html": "/Users/zhouningyi/git/tools/vicom/index.html"
 }
